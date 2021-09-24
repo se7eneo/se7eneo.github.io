@@ -2437,8 +2437,8 @@ pre .javascript .function {
 }
 .navbar .nav.nav-main .nav-item-link::before,
 .navbar .nav.nav-main .nav-item-link i.fe {
+  display: block;
   line-height: 1;
-  margin-right: 10x;
 }
 .navbar .nav.nav-main .nav-item-link::before {
   font-family: 'feathericon';
