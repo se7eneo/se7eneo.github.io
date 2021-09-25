@@ -143,25 +143,17 @@
 <p><a target="_blank" rel="noopener" href="https://zhwangart.com/2019/07/02/Ocean-Issues/">使用 Ocean 过程中遇到了问题？</a></p>
 <hr>
 <p>另外，除了以上官方文档外，博主松林羊的<a target="_blank" rel="noopener" href="https://blog.csdn.net/github_33809414/article/details/101430453">一个帖子</a>还提到了很多定制化的改动,在此也一并整合，备用</p>
-<h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><ol>
-<li><strong>文章自动添加Read More</strong><br>将\themes\ocean\layout_partial\article.ejs文中的&lt;% if (post.excerpt &amp;&amp; index){ %&gt;的else部分替换为如下内容：</li>
-</ol>
+<h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><h3 id="1-文章自动添加Read-More"><a href="#1-文章自动添加Read-More" class="headerlink" title="1.文章自动添加Read More"></a>1.<strong>文章自动添加Read More</strong></h3><p>将\themes\ocean\layout_partial\article.ejs文中的&lt;% if (post.excerpt &amp;&amp; index){ %&gt;的else部分替换为如下内容：</p>
 <figure class="highlight plaintext"><figcaption><span>var br </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if(br &lt; 0 || !index) &#123; %&gt;</span><br><span class="line">  &lt;%- post.more %&gt;</span><br><span class="line">&lt;% &#125; else &#123; %&gt;</span><br><span class="line">  &lt;%- post.content.substring(0, br) %&gt;&lt;br/&gt;</span><br><span class="line">  &lt;% if (theme.excerpt_link) &#123; %&gt;</span><br><span class="line">	&lt;a class=&quot;article-more-link&quot; href=&quot;&lt;%- url_for(post.path) %&gt;&quot;&gt;&lt;%= theme.excerpt_link %&gt;&lt;/a&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;% &#125; %&gt;```</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li><strong>搜索功能不起作用? or 除开首页不能正常搜索</strong><br>本地检索需要安装插件<br><code>npm install hexo-generator-searchdb --save</code></li>
-</ol>
+<h3 id="2-搜索功能不起作用-or-除开首页不能正常搜索"><a href="#2-搜索功能不起作用-or-除开首页不能正常搜索" class="headerlink" title="2.搜索功能不起作用? or 除开首页不能正常搜索"></a>2.<strong>搜索功能不起作用? or 除开首页不能正常搜索</strong></h3><p>本地检索需要安装插件<br><code>npm install hexo-generator-searchdb --save</code></p>
 <p>另外一个问题：插件搜索函数返回的url 地址有问题 ，作者说是因为 “中文字符被URL encode了 ” 。后来我找到一个解决办法：<br>将 [folder]/node_modules/hexo-generator-searchdb/templates/xml.ejs 文件中的：<br><code>&lt;url&gt;&lt;%- encodeURIComponent(config.root + post.path) %&gt;&lt;/url&gt;</code></p>
 <p>修改为<br><code>&lt;url&gt;&lt;%- encodeURI(config.root + post.path) %&gt;&lt;/url&gt;</code></p>
-<ol start="3">
-<li><p><strong>修改导航栏</strong></p>
-<p>修改 themes/ocean/source/css/_partial/navbar.styl 文件</p>
-</li>
-<li><p><strong>文章添加封面图片</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Post name</span><br><span class="line">date: 2019-07-24 22:01:03</span><br><span class="line">photos: [</span><br><span class="line">        [<span class="string">&quot;/images/相机.jpg&quot;</span>], //themes/ocean/<span class="built_in">source</span>/images目录下</span><br><span class="line">        [<span class="string">&quot;https://tuchong.pstatp.com/2716763/f/531173888.jpg&quot;</span>]</span><br><span class="line"></span><br><span class="line">  ] </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h3 id="3-修改导航栏"><a href="#3-修改导航栏" class="headerlink" title="3. 修改导航栏"></a>3. <strong>修改导航栏</strong></h3><p>修改 themes/ocean/source/css/_partial/navbar.styl 文件</p>
+<h3 id="4-文章添加封面图片"><a href="#4-文章添加封面图片" class="headerlink" title="4.文章添加封面图片"></a>4.<strong>文章添加封面图片</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Post name</span><br><span class="line">date: 2019-07-24 22:01:03</span><br><span class="line">photos: [</span><br><span class="line">        [<span class="string">&quot;/images/相机.jpg&quot;</span>], //themes/ocean/<span class="built_in">source</span>/images目录下</span><br><span class="line">        [<span class="string">&quot;https://tuchong.pstatp.com/2716763/f/531173888.jpg&quot;</span>]</span><br><span class="line"></span><br><span class="line">  ] </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>在首页只会显示第一张，详情页会按顺序显示这两张</p>
-</li>
+<ol start="5">
 <li><p><strong>头像旋转效果</strong></p>
 <p>打开\themes\ocean\layout_partial\sidebar.ejs，给<div class=logo>下的img加上一个id。然后参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011295864/article/details/84773123">css + js实现图片不停旋转 鼠标悬停停止旋转</a><br>然后将里面的js代码copy到一个my.js文件中（注意替换img的id），保存到/themes/ocean/source/js/src目录。<br>然后在\themes\ocean\layout_partial\after-footer.ejs中最后一行写入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- js(<span class="string">&#x27;/js/my.js&#x27;</span>) %&gt;</span><br></pre></td></tr></table></figure></li>
